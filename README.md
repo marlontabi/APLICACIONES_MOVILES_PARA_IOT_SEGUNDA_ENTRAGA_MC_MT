@@ -42,7 +42,7 @@ Esta aplicación permite:
 1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/marlontabi/APLICACIONES_MOVILES_PARA_IOT_SEGUNDA_ENTRAGA_MC_MT.git
+git clone https://github.com/marlontabi/APLICACIONES_MOVILES_PARA_IOT_SEGUNDA_ENTREGA_MC_MT.git
 ```
 
 2. Abre el proyecto en Android Studio.
