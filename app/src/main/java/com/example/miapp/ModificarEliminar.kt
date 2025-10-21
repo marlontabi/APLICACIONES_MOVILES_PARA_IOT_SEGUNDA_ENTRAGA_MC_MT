@@ -34,38 +34,30 @@ class ModificarEliminar : AppCompatActivity() {
         btnVolver = findViewById(R.id.btnVolver)
         dbHelper = ConexionDbHelper(this)
 
-        // Recuperar ID de usuario desde el intent
-        idUsuario = intent.getIntExtra("ID_USUARIO", -1)
-        if (idUsuario != -1) {
-            cargarDatosUsuario()
-        } else {
+        idUsuario = intent.getIntExtra("USUARIO_ID", -1)
+
+        if (idUsuario == -1) {
             SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                 .setTitleText("Error")
                 .setContentText("No se pudo cargar el usuario.")
                 .show()
-        }
-
-        // Botón guardar cambios
-        btnGuardar.setOnClickListener {
-            guardarCambios()
-        }
-
-        // Botón eliminar usuario
-        btnEliminar.setOnClickListener {
-            confirmarEliminacion()
-        }
-
-        // Botón volver
-        btnVolver.setOnClickListener {
-            val intent = Intent(this, ListadoUsuarios::class.java)
-            startActivity(intent)
             finish()
+            return
+        } else {
+            cargarDatosUsuario()
         }
+
+        btnGuardar.setOnClickListener { guardarCambios() }
+        btnEliminar.setOnClickListener { confirmarEliminacion() }
+        btnVolver.setOnClickListener { finish() }
     }
 
     private fun cargarDatosUsuario() {
-        val db: SQLiteDatabase = dbHelper.readableDatabase
-        val cursor = db.rawQuery("SELECT NOMBRE, APELLIDOS, EMAIL FROM USUARIOS WHERE ID = ?", arrayOf(idUsuario.toString()))
+        val db = dbHelper.readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT NOMBRE, APELLIDOS, EMAIL FROM USUARIOS WHERE ID = ?",
+            arrayOf(idUsuario.toString())
+        )
 
         if (cursor.moveToFirst()) {
             editNombre.setText(cursor.getString(0))
@@ -81,31 +73,36 @@ class ModificarEliminar : AppCompatActivity() {
         val apellidos = editApellidos.text.toString().trim()
         val email = editEmail.text.toString().trim()
 
-        if (nombre.isEmpty() || apellidos.isEmpty() || email.isEmpty()) {
-            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("Campos vacíos")
-                .setContentText("Debes completar todos los campos.")
-                .show()
-            return
+        when {
+            nombre.isEmpty() || apellidos.isEmpty() || email.isEmpty() -> {
+                mostrarAlerta("Campos vacíos", "Debes completar todos los campos.", SweetAlertDialog.WARNING_TYPE)
+                return
+            }
+
+            !nombre.matches(Regex("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")) -> {
+                mostrarAlerta("Nombre inválido", "El nombre solo puede contener letras y espacios.", SweetAlertDialog.ERROR_TYPE)
+                return
+            }
+
+            !apellidos.matches(Regex("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")) -> {
+                mostrarAlerta("Apellidos inválidos", "Los apellidos solo pueden contener letras y espacios.", SweetAlertDialog.ERROR_TYPE)
+                return
+            }
+
+            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                mostrarAlerta("Correo inválido", "El formato del correo electrónico no es válido.", SweetAlertDialog.ERROR_TYPE)
+                return
+            }
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                .setTitleText("Formato inválido")
-                .setContentText("El correo ingresado no es válido.")
-                .show()
-            return
-        }
+        val db = dbHelper.writableDatabase
 
-        val db: SQLiteDatabase = dbHelper.writableDatabase
-
-        // Verificar si el correo ya existe (y no es del mismo usuario)
-        val cursor = db.rawQuery("SELECT ID FROM USUARIOS WHERE EMAIL = ? AND ID != ?", arrayOf(email, idUsuario.toString()))
+        val cursor = db.rawQuery(
+            "SELECT ID FROM USUARIOS WHERE EMAIL = ? AND ID != ?",
+            arrayOf(email, idUsuario.toString())
+        )
         if (cursor.moveToFirst()) {
-            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("Correo duplicado")
-                .setContentText("El correo ya está registrado en otro usuario.")
-                .show()
+            mostrarAlerta("Correo duplicado", "El correo ya está registrado en otro usuario.", SweetAlertDialog.WARNING_TYPE)
             cursor.close()
             db.close()
             return
@@ -122,21 +119,11 @@ class ModificarEliminar : AppCompatActivity() {
         db.close()
 
         if (filas > 0) {
-            SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText("Éxito")
-                .setContentText("Datos actualizados correctamente.")
-                .setConfirmClickListener {
-                    it.dismissWithAnimation()
-                    val intent = Intent(this, ListadoUsuarios::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-                .show()
+            mostrarAlerta("Éxito", "Datos actualizados correctamente.", SweetAlertDialog.SUCCESS_TYPE) {
+                finish()
+            }
         } else {
-            SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                .setTitleText("Error")
-                .setContentText("No se pudieron actualizar los datos.")
-                .show()
+            mostrarAlerta("Error", "No se pudieron actualizar los datos.", SweetAlertDialog.ERROR_TYPE)
         }
     }
 
@@ -155,26 +142,30 @@ class ModificarEliminar : AppCompatActivity() {
     }
 
     private fun eliminarUsuario() {
-        val db: SQLiteDatabase = dbHelper.writableDatabase
+        val db = dbHelper.writableDatabase
         val filas = db.delete("USUARIOS", "ID = ?", arrayOf(idUsuario.toString()))
         db.close()
 
         if (filas > 0) {
-            SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText("Eliminado")
-                .setContentText("Usuario eliminado correctamente.")
-                .setConfirmClickListener {
-                    it.dismissWithAnimation()
-                    val intent = Intent(this, ListadoUsuarios::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-                .show()
+            mostrarAlerta("Eliminado", "Usuario eliminado correctamente.", SweetAlertDialog.SUCCESS_TYPE) {
+                finish()
+            }
         } else {
-            SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                .setTitleText("Error")
-                .setContentText("No se pudo eliminar el usuario.")
-                .show()
+            mostrarAlerta("Error", "No se pudo eliminar el usuario.", SweetAlertDialog.ERROR_TYPE)
         }
+    }
+
+
+    private fun mostrarAlerta(titulo: String, mensaje: String, tipo: Int, onConfirm: (() -> Unit)? = null) {
+        val alert = SweetAlertDialog(this, tipo)
+            .setTitleText(titulo)
+            .setContentText(mensaje)
+        if (onConfirm != null) {
+            alert.setConfirmClickListener {
+                it.dismissWithAnimation()
+                onConfirm()
+            }
+        }
+        alert.show()
     }
 }

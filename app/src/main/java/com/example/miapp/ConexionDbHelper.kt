@@ -35,7 +35,7 @@ class ConexionDbHelper(context: Context) :
         db.execSQL(
             """
             INSERT INTO USUARIOS (NOMBRE, APELLIDOS, EMAIL, CLAVE, CLAVESEC)
-            VALUES ('Marlon', 'Tabilo Araya', 'deadbicicle123@gmail.com', 'Marlon123', 'marlon1');
+            VALUES ('Marlon', 'Tabilo Araya', 'admin@admin.cl', 'Admin123', 'marlon1');
             """.trimIndent()
         )
     }
@@ -48,6 +48,6 @@ class ConexionDbHelper(context: Context) :
 
     companion object {
         private const val DATABASE_NAME = "CRUD.db"
-        private const val DATABASE_VERSION = 7
+        private const val DATABASE_VERSION = 8
     }
 }

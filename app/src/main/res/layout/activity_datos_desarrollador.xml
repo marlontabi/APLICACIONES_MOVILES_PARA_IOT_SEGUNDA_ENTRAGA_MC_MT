@@ -11,6 +11,7 @@
         android:orientation="vertical"
         android:gravity="center">
 
+        <!-- 🔹 Developer 1 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,10 +58,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Institución: Instituto Profesional Inacap"
-                android:textColor="#333333"
+                android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:layout_marginTop="4dp" />
+                android:text="Institución: Instituto Profesional Inacap"
+                android:textColor="#333333" />
+
+            <!-- 🆕 Campo sección -->
+            <TextView
+                android:id="@+id/txtSeccion1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Sección: D-B50-N4-P13-C1"
+                android:textColor="#333333" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -85,6 +96,7 @@
             </LinearLayout>
         </LinearLayout>
 
+        <!-- 🔹 Developer 2 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -131,10 +143,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Institución: Instituto Profesional Inacap"
-                android:textColor="#333333"
+                android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:layout_marginTop="4dp" />
+                android:text="Institución: Instituto Profesional Inacap"
+                android:textColor="#333333" />
+
+            <!-- 🆕 Campo sección -->
+            <TextView
+                android:id="@+id/txtSeccion2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Sección: D-B50-N4-P13-C1"
+                android:textColor="#333333" />
 
             <TextView
                 android:layout_width="match_parent"
