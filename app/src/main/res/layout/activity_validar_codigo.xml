@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#F3F4F6"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:background="@drawable/login_card_bg"
+        android:elevation="8dp">
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="187dp"
+            android:layout_height="153dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            app:srcCompat="@drawable/logo" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Validar Código"
+            android:textSize="22sp"
+            android:textColor="#48795B"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp" />
+
+        <EditText
+            android:id="@+id/txtCodigo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingrese el código recibido"
+            android:inputType="number"
+            android:padding="12dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edittext_bg" />
+
+        <Button
+            android:id="@+id/btnValidarCodigo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Validar código"
+            android:backgroundTint="#48795B"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</LinearLayout>

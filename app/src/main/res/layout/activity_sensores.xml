@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="16dp"
+    tools:context=".Sensores">
+
+  <ImageView
+      android:id="@+id/imageView4"
+      android:layout_width="160dp"
+      android:layout_height="120dp"
+      android:layout_marginTop="24dp"
+      android:contentDescription="Logo"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:srcCompat="@drawable/logo" />
+
+  <TextView
+      android:id="@+id/titulo"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="DATOS SENSORES"
+      android:textColor="#444"
+      android:textSize="16sp"
+      android:layout_marginTop="4dp"
+      app:layout_constraintTop_toBottomOf="@id/imageView4"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <TextView
+      android:id="@+id/txtFecha"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="00/00/0000 00:00:00"
+      android:textColor="#48795B"
+      android:textSize="14sp"
+      android:layout_marginTop="6dp"
+      app:layout_constraintTop_toBottomOf="@id/titulo"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <ImageView
+      android:id="@+id/imgHum"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_marginTop="30dp"
+      android:src="@drawable/humedad"
+      app:layout_constraintTop_toBottomOf="@id/txtFecha"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <TextView
+      android:id="@+id/txtHum"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="HUMEDAD 45%"
+      android:textSize="20sp"
+      android:textColor="#2196F3"
+      android:textStyle="bold"
+      android:layout_marginTop="8dp"
+      app:layout_constraintTop_toBottomOf="@id/imgHum"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <ImageView
+      android:id="@+id/imgTemp"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_marginTop="24dp"
+      android:src="@drawable/tempbaja"
+      app:layout_constraintTop_toBottomOf="@id/txtHum"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <TextView
+      android:id="@+id/txtTemp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="TEMPERATURA 18°"
+      android:textSize="20sp"
+      android:textColor="#E67E22"
+      android:textStyle="bold"
+      android:layout_marginTop="8dp"
+      app:layout_constraintTop_toBottomOf="@id/imgTemp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <ImageView
+      android:id="@+id/imgLinterna"
+      android:layout_width="140dp"
+      android:layout_height="140dp"
+      android:layout_marginTop="32dp"
+      android:src="@drawable/linternaoff"
+      app:layout_constraintTop_toBottomOf="@id/txtTemp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:contentDescription="Linterna" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
