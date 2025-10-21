@@ -48,6 +48,6 @@ git clone https://github.com/marlontabi/APLICACIONES_MOVILES_PARA_IOT_SEGUNDA_EN
 2. Abre el proyecto en Android Studio.
 3. Sincroniza los paquetes y ejecuta la aplicación en un dispositivo físico o emulador.
 
-**Autor:** [marlontabi](https://github.com/marlontabi)   [Zaoryk](https://github.com/Zaoryk)
+**Autores:** [M.T](https://github.com/marlontabi)   [M.C](https://github.com/Zaoryk)
 
 
